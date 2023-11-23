@@ -94,14 +94,17 @@ class _TransactionScreenState extends State<TransactionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transaction App'),
+        title: Text('PeraPlan Dummy App for Backend'),
       ),
       body: Column(
         children: [
+          SizedBox(height: large),
           Text(
-            'Balance: ${calculateBalance().toStringAsFixed(2)}',
+            'User Balance: ${calculateBalance().toStringAsFixed(2)}',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
+          SizedBox(height: large),
+
           // Dropdown for Transaction Type
           DropdownButtonFormField<String>(
             value: _selectedTransactionType,
@@ -203,6 +206,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
             onPressed: _addTransaction,
             child: Text('Add Transaction'),
           ),
+          SizedBox(height: medium),
           Expanded(
             child: ValueListenableBuilder(
               valueListenable: _transactionBox.listenable(),
