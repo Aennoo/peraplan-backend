@@ -73,6 +73,23 @@ class _TransactionScreenState extends State<TransactionScreen> {
     setState(() {});
   }
 
+  double calculateBalance() {
+    double peraInTotal = 0.0;
+    double peraOutTotal = 0.0;
+
+    for (int i = 0; i < _transactionBox.length; i++) {
+      final transaction = _transactionBox.getAt(i);
+
+      if (transaction is PeraIn) {
+        peraInTotal += transaction.amount;
+      } else if (transaction is PeraOut) {
+        peraOutTotal += transaction.amount;
+      }
+    }
+
+    return peraInTotal - peraOutTotal;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +98,10 @@ class _TransactionScreenState extends State<TransactionScreen> {
       ),
       body: Column(
         children: [
+          Text(
+            'Balance: ${calculateBalance().toStringAsFixed(2)}',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
           // Dropdown for Transaction Type
           DropdownButtonFormField<String>(
             value: _selectedTransactionType,
